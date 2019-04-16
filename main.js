@@ -4,8 +4,8 @@ app.on('ready', () => {
     console.log('Aplicacao iniciada');
 
     let mainWindow = new BrowserWindow({
-        width: 600,
-        height: 400
+        width: 1024,
+        height: 768
     });
 
     mainWindow.loadURL(`file://${__dirname}/app/index.html`);

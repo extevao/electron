@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^4.1.4"
+    "electron": "^4.1.4",
+    "moment": "^2.24.0"
   }
 }
