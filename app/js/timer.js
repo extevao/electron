@@ -17,7 +17,6 @@ module.exports = {
              el.textContent = this.segundosParaTempo(segundos);
         }, 1000);
 
-
     },
 
     parar(curso) {

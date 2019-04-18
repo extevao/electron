@@ -8,14 +8,27 @@ module.exports = {
 
         if (fs.existsSync(arquivoDoCurso)) { 
             //salvar
+            this.adicionaTempoAoCurso(arquivoDoCurso, tempoEstudado);
         } else {
             // criar e salvar
 
             this.criaArquivoDeCurso(arquivoDoCurso, {})
                 .then(() => {
-                    // Salvar
-                })
+                    //salvar
+                    this.adicionaTempoAoCurso(arquivoDoCurso, tempoEstudado);
+                });
         }
+    },
+
+    adicionaTempoAoCurso(arquivoDoCurso, tempo) {
+        let dados = {
+            ultimoEstudo: new Date().toString(),
+            tempo: tempo
+        };
+
+        jsonfile.writeFile(arquivoDoCurso, dados, { spaces: 2 })
+            .then(() => console.log('tempo salvo com sucesso'))
+            .catch(err => console.log(err));
     },
 
     criaArquivoDeCurso(nomeArquivo, conteudoArquivo) {
