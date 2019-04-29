@@ -40,3 +40,12 @@ botaoPlay
         imgs = imgs.reverse();
         botaoPlay.src = imgs[0];
     });
+
+
+ipcRenderer.on('curso-trocado', (event, nomeCurso) => {
+    data.pegaDados(nomeCurso)
+        .then(dados => {
+            tempo.textContent = dados.tempo;
+            curso.textContent = nomeCurso
+        });
+});

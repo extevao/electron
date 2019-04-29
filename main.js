@@ -14,12 +14,11 @@ app.on('ready', () => {
 
     tray = new Tray(__dirname + '/app/img/icon-tray.png');
    
-    let template = templateGenerator.gerarTrayTemplate();
+    let template = templateGenerator.gerarTrayTemplate(mainWindow);
     let trayMenu = Menu.buildFromTemplate(template);
 
     tray.setContextMenu(trayMenu);
 
-    data.pegaNomeDosCursos();
 
     mainWindow.loadURL(`file://${__dirname}/app/index.html`);
 });
