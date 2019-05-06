@@ -60,4 +60,6 @@ botaoAdicionar.addEventListener('click', function() {
    tempo.textContent = '00:00:00';
 
    campoAdicionar.value = '';
+
+   ipcRenderer.send('curso-adicionado', novoCurso);
 });
