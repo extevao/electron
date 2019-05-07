@@ -20,29 +20,12 @@ app.on('ready', () => {
 
     tray.setContextMenu(trayMenu);
 
-    let templateMenu = [
-        {
-            label: 'Menu menu',
-            submenu: [
-                { label: 'Item 1'},
-                { label: 'Item 2'},
-            ]
-        }
-    ];
-
-    if (process.platform == 'darwin') {
-        templateMenu.unshift({
-            label: app.getName(),
-            submenu: [ 
-                { label: 'ITEM DO SUBMENU' }
-            ]
-        });
-    }
+    let templateMenu = templateGenerator.geraMenuPrincipalTemplate(app);
 
     let menuPrincipal = Menu.buildFromTemplate(templateMenu);
     Menu.setApplicationMenu(menuPrincipal);
 
-
+    mainWindow.openDevTools();
     mainWindow.loadURL(`file://${__dirname}/app/index.html`);
 });
 
