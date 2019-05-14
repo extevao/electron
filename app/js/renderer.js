@@ -11,7 +11,7 @@ let campoAdicionar = document.querySelector('.campo-adicionar');
 
 
 window.onload = () => {
-console.log(curso.textContent)
+    console.log(curso.textContent)
 
     data.pegaDados(curso.textContent)
         .then(dados => {
@@ -19,7 +19,7 @@ console.log(curso.textContent)
         });
 }
 
-linkSobre.addEventListener('click' , function(){
+linkSobre.addEventListener('click', function () {
     ipcRenderer.send('abrir-janela-sobre');
 });
 
@@ -55,29 +55,41 @@ botaoPlay
 
 
 ipcRenderer.on('curso-trocado', (event, nomeCurso) => {
+    timer.parar(curso.textContent);
+
     data.pegaDados(nomeCurso)
         .then(dados => {
             tempo.textContent = dados.tempo;
             curso.textContent = nomeCurso
-        });
+        })
+        .catch((err) => {
+            console.log('O curso ainda não possuí um JSON');
+            tempo.textContent = '00:00';
+        })
 });
 
 
-botaoAdicionar.addEventListener('click', function() {
-   let novoCurso = campoAdicionar.value;
+botaoAdicionar.addEventListener('click', function () {
 
-   curso.textContent = novoCurso;
-   tempo.textContent = '00:00:00';
+    if (campoAdicionar.value == '') {
+        console.log('Não posso adicionar um curso com nome vazio');
+        return;
+    }
 
-   campoAdicionar.value = '';
+    let novoCurso = campoAdicionar.value;
 
-   ipcRenderer.send('curso-adicionado', novoCurso);
+    curso.textContent = novoCurso;
+    tempo.textContent = '00:00:00';
+
+    campoAdicionar.value = '';
+
+    ipcRenderer.send('curso-adicionado', novoCurso);
 });
 
 
 ipcRenderer.on('atalho-iniciar-parar', () => {
-   console.log('atalaho bem loko')
+    console.log('atalaho bem loko')
 
-   let click  = new MouseEvent('click');
-   botaoPlay.dispatchEvent(click);
+    let click = new MouseEvent('click');
+    botaoPlay.dispatchEvent(click);
 });
