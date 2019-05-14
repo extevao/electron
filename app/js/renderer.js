@@ -33,9 +33,19 @@ botaoPlay
         if (play) {
             timer.parar(curso.textContent);
             play = false;
+
+            new Notification('Alura Timer', {
+                body: `O curso ${curso.textContent} foi parado`,
+                icon: 'img/stop-button.png'
+            });
         } else {
             timer.iniciar(tempo);
             play = true;
+
+            new Notification('Alura Timer', {
+                body: `O curso ${curso.textContent} foi iniciado!!!`,
+                icon: 'img/play-button.png'
+            });
         }
 
 
